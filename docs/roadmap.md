@@ -3,9 +3,9 @@
 ## 1. Repository & Project Setup
 
 ### Repository structure
-- [ ] Create the basic repository structure.
-- [ ] Create `backend/`, `frontend/` and `docs/` directories.
-- [ ] Move and organize project documentation in `docs/`.
+- [X] Create the basic repository structure.
+- [X] Create `backend/`, `frontend/` and `docs/` directories.
+- [X] Move and organize project documentation in `docs/`.
 
 ### Version control
 - [X] Initialize Git repository.
