@@ -8,9 +8,9 @@
 - [ ] Move and organize project documentation in `docs/`.
 
 ### Version control
-- [ ] Initialize Git repository.
-- [ ] Review and update `.gitignore`.
-- [ ] Add `.env.example` with required environment variables.
+- [X] Initialize Git repository.
+- [X] Review and update `.gitignore`.
+- [X] Add `.env.example` with required environment variables.
 
 
 ---
