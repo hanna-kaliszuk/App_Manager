@@ -18,11 +18,11 @@
 ## 2. Development Environment
 
 ### Backend
-- [ ] Create Python virtual environment.
-- [ ] Install Django.
-- [ ] Install Django REST Framework.
-- [ ] Create the Django project.
-- [ ] Create the initial Django application(s).
+- [X] Create Python virtual environment.
+- [X] Install Django.
+- [X] Install Django REST Framework.
+- [X] Create the Django project.
+- [X] Create the initial Django application(s).
 - [ ] Configure environment variables.
 - [ ] Configure PostgreSQL connection.
 
