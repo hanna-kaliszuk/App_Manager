@@ -284,6 +284,16 @@ To register
 **Available actions:**
 Register, go to logging in, register with github, ..., 
 
+### Screen 4 — Welcome (future Dashboard)
+
+**Purpose:**
+To welcome the user and provide access to the main application sections.
+
+**Main elements:**
+Log out, nav bar, "Welcome XXX!"
+
+**Available actions:**
+Log out, go to Jobs / Studies
 
 ### Screen 4 — Job Applications
 
