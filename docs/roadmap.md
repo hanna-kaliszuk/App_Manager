@@ -35,8 +35,8 @@
 ### Database
 - [X] Install / configure PostgreSQL.
 - [X] Create the development database.
-- [ ] Connect Django to PostgreSQL.
-- [ ] Verify that Django can connect to the database.
+- [X] Connect Django to PostgreSQL.
+- [X] Verify that Django can connect to the database.
 
 ### Development tools
 - [ ] Configure formatting / linting tools.
