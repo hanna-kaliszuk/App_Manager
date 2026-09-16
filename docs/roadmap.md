@@ -29,7 +29,7 @@
 ### Frontend
 - [X] Set up React with TypeScript.
 - [X] Set up Vite.
-- [ ] Install and configure React Router.
+- [X] Install and configure React Router.
 - [ ] Set up the initial frontend structure.
 
 ### Database
