@@ -51,8 +51,8 @@
 - [X] Create the basic Django project structure.
 - [X] Configure Django REST Framework.
 - [X] Configure CORS for the frontend.
-- [ ] Set up the Django settings for development.
-- [ ] Configure the database and migrations.
+- [X] Set up the Django settings for development.
+- [X] Configure the database and migrations.
 - [ ] Create a basic test API endpoint.
 - [ ] Verify that the API can be accessed locally.
 - [ ] Verify that the backend can communicate with PostgreSQL.
