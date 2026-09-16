@@ -33,8 +33,8 @@
 - [ ] Set up the initial frontend structure.
 
 ### Database
-- [ ] Install / configure PostgreSQL.
-- [ ] Create the development database.
+- [X] Install / configure PostgreSQL.
+- [X] Create the development database.
 - [ ] Connect Django to PostgreSQL.
 - [ ] Verify that Django can connect to the database.
 
