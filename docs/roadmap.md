@@ -49,8 +49,8 @@
 ## 3. Backend Foundation
 
 - [X] Create the basic Django project structure.
-- [ ] Configure Django REST Framework.
-- [ ] Configure CORS for the frontend.
+- [X] Configure Django REST Framework.
+- [X] Configure CORS for the frontend.
 - [ ] Set up the Django settings for development.
 - [ ] Configure the database and migrations.
 - [ ] Create a basic test API endpoint.
