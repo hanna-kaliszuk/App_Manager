@@ -30,7 +30,7 @@
 - [X] Set up React with TypeScript.
 - [X] Set up Vite.
 - [X] Install and configure React Router.
-- [ ] Set up the initial frontend structure.
+- [X] Set up the initial frontend structure.
 
 ### Database
 - [X] Install / configure PostgreSQL.
@@ -39,7 +39,7 @@
 - [X] Verify that Django can connect to the database.
 
 ### Development tools
-- [ ] Configure formatting / linting tools.
+- [X] Configure formatting / linting tools.
 - [ ] Configure backend testing tools.
 - [ ] Configure frontend testing tools.
 - [ ] Verify that the complete development environment runs locally.

@@ -1,0 +1,12 @@
+[tool.ruff]
+line-length = 88
+target-version = "py314"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.ruff.lint.per-file-ignores]
+"applications/admin.py" = ["F401"]
+"applications/models.py" = ["F401"]
+"applications/tests.py" = ["F401"]
+"applications/views.py" = ["F401"]
