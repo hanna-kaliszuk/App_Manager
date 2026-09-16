@@ -27,8 +27,8 @@
 - [X] Configure PostgreSQL connection.
 
 ### Frontend
-- [ ] Set up React with TypeScript.
-- [ ] Set up Vite.
+- [X] Set up React with TypeScript.
+- [X] Set up Vite.
 - [ ] Install and configure React Router.
 - [ ] Set up the initial frontend structure.
 
