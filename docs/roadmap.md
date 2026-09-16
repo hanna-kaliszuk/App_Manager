@@ -23,8 +23,8 @@
 - [X] Install Django REST Framework.
 - [X] Create the Django project.
 - [X] Create the initial Django application(s).
-- [ ] Configure environment variables.
-- [ ] Configure PostgreSQL connection.
+- [X] Configure environment variables.
+- [X] Configure PostgreSQL connection.
 
 ### Frontend
 - [ ] Set up React with TypeScript.
