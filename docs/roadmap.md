@@ -41,8 +41,8 @@
 ### Development tools
 - [X] Configure formatting / linting tools.
 - [X] Configure backend testing tools.
-- [ ] Configure frontend testing tools.
-- [ ] Verify that the complete development environment runs locally.
+- [X] Configure frontend testing tools.
+- [X] Verify that the complete development environment runs locally.
 
 ---
 
