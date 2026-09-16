@@ -53,8 +53,8 @@
 - [X] Configure CORS for the frontend.
 - [X] Set up the Django settings for development.
 - [X] Configure the database and migrations.
-- [ ] Create a basic test API endpoint.
-- [ ] Verify that the API can be accessed locally.
+- [X] Create a basic test API endpoint.
+- [X] Verify that the API can be accessed locally.
 - [ ] Verify that the backend can communicate with PostgreSQL.
 - [ ] Add initial backend tests.
 
