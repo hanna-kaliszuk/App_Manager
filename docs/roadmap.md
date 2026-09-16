@@ -55,8 +55,8 @@
 - [X] Configure the database and migrations.
 - [X] Create a basic test API endpoint.
 - [X] Verify that the API can be accessed locally.
-- [ ] Verify that the backend can communicate with PostgreSQL.
-- [ ] Add initial backend tests.
+- [X] Verify that the backend can communicate with PostgreSQL.
+- [X] Add initial backend tests.
 
 ---
 
