@@ -232,7 +232,9 @@ Save the offers, add and manage application records, update status, view and man
 - Requirements
 - Recruiter / contact person 
 - Dashboard
-- Email from which the application was sent / response is supposed to be sent to 
+- Email from which the application was sent / response is supposed to be sent to
+- Feedback form on the homepage / every page
+- Password reminder
 
 
 ### Future
