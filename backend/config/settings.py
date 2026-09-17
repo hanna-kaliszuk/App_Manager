@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     "rest_framework",
     "applications",
+    "users",
     "corsheaders",
 ]
 
@@ -69,6 +70,8 @@ DATABASES = {
         "PORT": os.environ["POSTGRES_PORT"],
     }
 }
+
+AUTH_USER_MODEL = 'users.User'
 
 AUTH_PASSWORD_VALIDATORS = [
     {
