@@ -1,5 +1,12 @@
+import Navbar from "../components/Navbar/Navbar"
+
 function Jobs() {
-  return <h1>Job Applications</h1>
+  return (
+    <>
+        <Navbar />
+        <h1>Job Applications</h1>
+    </>
+  )
 }
 
 export default Jobs

@@ -1,5 +1,12 @@
+import Navbar from "../components/Navbar/Navbar"
+
 function Studies() {
-  return <h1>Study Applications</h1>
+    return (
+    <>
+        <Navbar />
+        <h1>Studies</h1>
+    </>
+  )
 }
 
 export default Studies

@@ -66,8 +66,8 @@
 
 ## 4. Frontend Foundation
 
-- [ ] Create the basic React application structure.
-- [ ] Configure React Router.
+- [X] Create the basic React application structure.
+- [X] Configure React Router.
 - [ ] Create the initial application layout.
 - [ ] Create the main application screens:
   - [ ] Home
