@@ -58,8 +58,6 @@
 - [X] Verify that the backend can communicate with PostgreSQL.
 - [X] Add initial backend tests.
 - [X] Model User
-- [ ] Model Job
-- [ ] Model Studies
 
 
 ---
@@ -68,18 +66,24 @@
 
 - [X] Create the basic React application structure.
 - [X] Configure React Router.
-- [ ] Create the initial application layout.
-- [ ] Create the main application screens:
-  - [ ] Home
-  - [ ] Log In
-  - [ ] Register
-  - [ ] Welcome
-  - [ ] Job Applications
-  - [ ] Studies Applications
+- [X] Create the initial application layout.
+- [X] Create the main application screens:
+  - [X] Home
+  - [X] Log In
+  - [X] Register
+  - [X] Welcome
+  - [X] Job Applications
+  - [X] Studies Applications
 - [ ] Set up communication with the backend API.
 - [ ] Verify that the frontend can communicate with the backend.
 - [ ] Add initial frontend tests.
-
+- [ ] Build the main screens:
+  - [X] Home
+  - [ ] Log In
+  - [ ] Register
+  - [ ] Welcome
+  - [ ] Jobs
+  - [ ] Studies
 ---
 
 ## 5. Backend–Frontend Integration
