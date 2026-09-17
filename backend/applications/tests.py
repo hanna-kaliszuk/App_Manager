@@ -1,5 +1,5 @@
-from django.test import TestCase
 from rest_framework.test import APITestCase
+
 
 class TestApiResponse(APITestCase):
     def test_endpoint_only_receiving_get(self):
