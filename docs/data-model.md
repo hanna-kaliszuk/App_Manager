@@ -9,7 +9,7 @@
 | `email` | varchar | yes | Unique; used for login |
 | `password` | hashed string | yes | Hashed password |
 | `last_login` | datetime | no | Date and time of the user's last login |
-| `created_at` | datetime | yes | Date and time when the account was created |
+| `date_joined` | datetime | yes | Date and time when the account was created |
 
 A user can have multiple job applications and multiple studies applications.
 

@@ -57,6 +57,7 @@
 - [X] Verify that the API can be accessed locally.
 - [X] Verify that the backend can communicate with PostgreSQL.
 - [X] Add initial backend tests.
+- [ ] Model User
 
 ---
 
@@ -79,6 +80,7 @@
 ---
 
 ## 5. Backend–Frontend Integration
+
 
 - Connect the frontend and backend.
 - Implement API communication.
