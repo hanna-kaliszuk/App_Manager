@@ -58,6 +58,9 @@
 - [X] Verify that the backend can communicate with PostgreSQL.
 - [X] Add initial backend tests.
 - [X] Model User
+- [ ] Model Job
+- [ ] Model Studies
+
 
 ---
 
