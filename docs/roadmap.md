@@ -57,7 +57,7 @@
 - [X] Verify that the API can be accessed locally.
 - [X] Verify that the backend can communicate with PostgreSQL.
 - [X] Add initial backend tests.
-- [ ] Model User
+- [X] Model User
 
 ---
 
