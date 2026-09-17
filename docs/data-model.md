@@ -5,6 +5,7 @@
 | Field | Type | Required | Constraints / Description |
 |---|---|---|---|
 | `id` | integer / UUID | yes | Primary key |
+| `name`| varchar | yes| |
 | `email` | varchar | yes | Unique; used for login |
 | `password` | hashed string | yes | Hashed password |
 | `last_login` | datetime | no | Date and time of the user's last login |
