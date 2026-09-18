@@ -1,9 +1,9 @@
-import Navbar from "../components/Navbar/Navbar"
+//import { Link } from "react-router-dom"
+//import Navbar from "../components/Navbar/Navbar"
 
 function Jobs() {
   return (
     <>
-        <Navbar />
         <h1>Job Applications</h1>
     </>
   )

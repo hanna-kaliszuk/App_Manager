@@ -1,12 +1,13 @@
-import { Link } from 'react-router-dom'
+import type { ReactNode } from "react"
 
-function Navbar() {
+type NavbarProps = {
+  children: ReactNode
+}
+
+function Navbar({ children }: NavbarProps) {
   return (
     <nav>
-      <Link to="/welcome">Welcome</Link>
-      <Link to="/studies">Studies</Link>
-      <Link to="/jobs">Jobs</Link>
-      {/* Log Out */}
+      {children}
     </nav>
   )
 }
