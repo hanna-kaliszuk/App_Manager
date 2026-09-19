@@ -1,12 +1,13 @@
+from django.contrib.auth import authenticate, get_user_model, login
+from django.contrib.auth.password_validation import validate_password
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
-from django.contrib.auth import authenticate, login, get_user_model
-from django.contrib.auth.password_validation import validate_password
 from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
 
 def require_field(value, field_name):
     if value is None:
@@ -15,6 +16,7 @@ def require_field(value, field_name):
             status=status.HTTP_400_BAD_REQUEST,
         )
     return None
+
 
 def validate_login_data(request):
     email = request.data.get("email")
@@ -28,6 +30,7 @@ def validate_login_data(request):
         return error
 
     return email, password
+
 
 def validate_registration_data(request):
     first_name = request.data.get("first_name")
