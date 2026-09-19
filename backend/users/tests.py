@@ -51,3 +51,25 @@ class LoginTests(APITestCase):
         )
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_login_without_email(self):
+        response = self.client.post(
+            "/api/auth/login/",
+            {
+                "password": "correct-password",
+            },
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_login_without_password(self):
+        response = self.client.post(
+            "/api/auth/login/",
+            {
+                "email": "test@example.com",
+            },
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
