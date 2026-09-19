@@ -1,0 +1,28 @@
+from django.contrib.auth import authenticate, login
+from rest_framework import status
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
+
+@api_view(["POST"])
+def login_view(request):
+    email = request.data.get("email")
+    password = request.data.get("password")
+
+    user = authenticate(
+        request,
+        email=email,
+        password=password,
+    )
+
+    if user is None:
+        return Response(
+            {"detail": "invalid credentials."},
+            status=status.HTTP_401_UNAUTHORIZED,
+        )
+
+    login(request, user)
+    return Response(
+        {"detail": "valid credentials."},
+        status=status.HTTP_200_OK,
+    )

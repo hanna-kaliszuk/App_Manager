@@ -76,10 +76,10 @@
   - [X] Studies Applications
 - [ ] Set up communication with the backend API.
 - [ ] Verify that the frontend can communicate with the backend.
-- [ ] Add initial frontend tests.
+- [X] Add initial frontend tests.
 - [ ] Build the main screens:
   - [X] Home
-  - [ ] Log In
+  - [X] Log In
   - [ ] Register
   - [ ] Welcome
   - [ ] Jobs
