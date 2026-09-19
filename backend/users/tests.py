@@ -39,3 +39,15 @@ class LoginTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
         self.assertFalse(response.wsgi_request.user.is_authenticated)
+
+    def test_login_with_nonexistent_user(self):
+        response = self.client.post(
+            "/api/auth/login/",
+            {
+                "email": "nonexistent@example.com",
+                "password": "correct-password",
+            },
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
