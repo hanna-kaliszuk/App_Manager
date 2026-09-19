@@ -73,3 +73,70 @@ class LoginTests(APITestCase):
         )
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+class RegistrationTests(APITestCase):
+    def test_register_without_first_name(self):
+        response = self.client.post(
+            "/api/auth/register/",
+            {
+                "last_name": "User",
+                "email": "test@example.com",
+                "password": "correct-password",
+            },
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_register_without_last_name(self):
+        response = self.client.post(
+            "/api/auth/register/",
+            {
+                "first_name": "Test",
+                "email": "test@example.com",
+                "password": "correct-password",
+            },
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_register_without_email(self):
+        response = self.client.post(
+            "/api/auth/register/",
+            {
+                "first_name": "Test",
+                "last_name": "User",
+                "password": "correct-password",
+            },
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_register_with_invalid_email(self):
+        response = self.client.post(
+            "/api/auth/register/",
+            {
+                "first_name": "Test",
+                "last_name": "User",
+                "email": "not-an-email",
+                "password": "correct-password",
+            },
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_register_without_password(self):
+        response = self.client.post(
+            "/api/auth/register/",
+            {
+                "first_name": "Test",
+                "last_name": "User",
+                "email": "test@example.com",
+            },
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)

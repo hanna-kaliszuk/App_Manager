@@ -1,3 +1,5 @@
+from django.core.exceptions import ValidationError
+from django.core.validators import validate_email
 from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
@@ -39,6 +41,45 @@ def login_view(request):
         {"detail": "valid credentials."},
         status=status.HTTP_200_OK,
     )
+
+@api_view(["POST"])
+def register_view(request):
+    first_name = request.data.get("first_name")
+    if first_name is None:
+        return Response(
+            {"detail": "first_name must be provided"},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    last_name = request.data.get("last_name")
+    if last_name is None:
+        return Response(
+            {"detail": "last_name must be provided"},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    email = request.data.get("email")
+    if email is None:
+        return Response(
+            {"detail": "email must be provided"},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    try:
+        validate_email(email)
+    except ValidationError:
+        return Response(
+            {"detail": "Invalid email address."},
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+
+    password = request.data.get("password")
+    if password is None:
+        return Response(
+            {"detail": "password must be provided"},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
 
 
 @ensure_csrf_cookie
