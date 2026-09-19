@@ -29,6 +29,45 @@ def validate_login_data(request):
 
     return email, password
 
+def validate_registration_data(request):
+    first_name = request.data.get("first_name")
+    error = require_field(first_name, "first_name")
+    if error:
+        return error
+
+    last_name = request.data.get("last_name")
+    error = require_field(last_name, "last_name")
+    if error:
+        return error
+
+    email = request.data.get("email")
+    error = require_field(email, "email")
+    if error:
+        return error
+
+    try:
+        validate_email(email)
+    except ValidationError:
+        return Response(
+            {"detail": "Invalid email address."}, status=status.HTTP_400_BAD_REQUEST
+        )
+
+    password = request.data.get("password")
+    error = require_field(password, "password")
+    if error:
+        return error
+
+    try:
+        validate_password(password)
+    except ValidationError:
+        return Response(
+            {"detail": "Invalid password."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
+    return first_name, last_name, email, password
+
+
 @api_view(["POST"])
 def login_view(request):
     data = validate_login_data(request)
@@ -59,45 +98,17 @@ def login_view(request):
 
 @api_view(["POST"])
 def register_view(request):
-    first_name = request.data.get("first_name")
-    error = require_field(first_name, "first_name")
-    if error:
-        return error
+    data = validate_registration_data(request)
 
-    last_name = request.data.get("last_name")
-    error = require_field(last_name, "last_name")
-    if error:
-        return error
+    if isinstance(data, Response):
+        return data
 
-    email = request.data.get("email")
-    error = require_field(email, "email")
-    if error:
-        return error
-
-    try:
-        validate_email(email)
-    except ValidationError:
-        return Response(
-            {"detail": "Invalid email address."}, status=status.HTTP_400_BAD_REQUEST
-        )
+    first_name, last_name, email, password = data
 
     User = get_user_model()
     if User.objects.filter(email=email).exists():
         return Response(
             {"detail": "Email is already in use."},
-            status=status.HTTP_400_BAD_REQUEST,
-        )
-
-    password = request.data.get("password")
-    error = require_field(password, "password")
-    if error:
-        return error
-
-    try:
-        validate_password(password)
-    except ValidationError:
-        return Response(
-            {"detail": "Invalid password."},
             status=status.HTTP_400_BAD_REQUEST,
         )
 
