@@ -97,8 +97,8 @@
 ## 6. Authentication
 
 - Implement registration.
-- Implement login and logout.
-- Implement session-based authentication.
+- ~~Implement login~~ and logout.
+- ~~Implement session-based authentication.~~
 - Protect authenticated endpoints.
 - Test authentication and authorization.
 
