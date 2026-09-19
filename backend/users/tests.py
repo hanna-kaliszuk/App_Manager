@@ -74,6 +74,7 @@ class LoginTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+
 class RegistrationTests(APITestCase):
     def test_register_without_first_name(self):
         response = self.client.post(
@@ -198,4 +199,3 @@ class RegistrationTests(APITestCase):
         self.assertEqual(user.first_name, "Test")
         self.assertEqual(user.last_name, "User")
         self.assertTrue(user.check_password("correct-password"))
-

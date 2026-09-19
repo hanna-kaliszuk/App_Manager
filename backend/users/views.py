@@ -43,6 +43,7 @@ def login_view(request):
         status=status.HTTP_200_OK,
     )
 
+
 @api_view(["POST"])
 def register_view(request):
     first_name = request.data.get("first_name")
@@ -70,8 +71,7 @@ def register_view(request):
         validate_email(email)
     except ValidationError:
         return Response(
-            {"detail": "Invalid email address."},
-            status=status.HTTP_400_BAD_REQUEST
+            {"detail": "Invalid email address."}, status=status.HTTP_400_BAD_REQUEST
         )
 
     User = get_user_model()
@@ -107,7 +107,6 @@ def register_view(request):
         {"detail": "Registration successful."},
         status=status.HTTP_201_CREATED,
     )
-
 
 
 @ensure_csrf_cookie
