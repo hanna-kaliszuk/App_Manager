@@ -29,6 +29,7 @@ def login_view(request):
         status=status.HTTP_200_OK,
     )
 
+
 @ensure_csrf_cookie
 def csrf_view(request):
     return JsonResponse({"detail": "CSRF cookie set."})
