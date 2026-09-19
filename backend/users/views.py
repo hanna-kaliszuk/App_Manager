@@ -1,6 +1,7 @@
 from django.core.exceptions import ValidationError
 from django.core.validators import validate_email
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth.password_validation import validate_password
 from django.http import JsonResponse
 from django.views.decorators.csrf import ensure_csrf_cookie
 from rest_framework import status
@@ -73,6 +74,12 @@ def register_view(request):
             status=status.HTTP_400_BAD_REQUEST
         )
 
+    User = get_user_model()
+    if User.objects.filter(email=email).exists():
+        return Response(
+            {"detail": "Email is already in use."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
 
     password = request.data.get("password")
     if password is None:
@@ -80,6 +87,7 @@ def register_view(request):
             {"detail": "password must be provided"},
             status=status.HTTP_400_BAD_REQUEST,
         )
+
 
 
 @ensure_csrf_cookie
