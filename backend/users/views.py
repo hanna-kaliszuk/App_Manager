@@ -88,6 +88,14 @@ def register_view(request):
             status=status.HTTP_400_BAD_REQUEST,
         )
 
+    try:
+        validate_password(password)
+    except ValidationError:
+        return Response(
+            {"detail": "Invalid password."},
+            status=status.HTTP_400_BAD_REQUEST,
+        )
+
 
 
 @ensure_csrf_cookie

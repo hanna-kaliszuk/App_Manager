@@ -163,3 +163,17 @@ class RegistrationTests(APITestCase):
         )
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
+
+    def test_register_with_invalid_password(self):
+        response = self.client.post(
+            "/api/auth/register/",
+            {
+                "first_name": "Test",
+                "last_name": "User",
+                "email": "test@example.com",
+                "password": "123",
+            },
+            format="json",
+        )
+
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
