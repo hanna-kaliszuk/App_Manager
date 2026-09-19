@@ -16,21 +16,27 @@ def require_field(value, field_name):
         )
     return None
 
-@api_view(["POST"])
-def login_view(request):
+def validate_login_data(request):
     email = request.data.get("email")
-    if email is None:
-        return Response(
-            {"detail": "email must be provided"},
-            status=status.HTTP_400_BAD_REQUEST,
-        )
+    error = require_field(email, "email")
+    if error:
+        return error
 
     password = request.data.get("password")
-    if password is None:
-        return Response(
-            {"detail": "password must be provided"},
-            status=status.HTTP_400_BAD_REQUEST,
-        )
+    error = require_field(password, "password")
+    if error:
+        return error
+
+    return email, password
+
+@api_view(["POST"])
+def login_view(request):
+    data = validate_login_data(request)
+
+    if isinstance(data, Response):
+        return data
+
+    email, password = data
 
     user = authenticate(
         request,
