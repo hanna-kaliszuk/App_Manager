@@ -4,9 +4,22 @@ import {expect, test, vi} from "vitest"
 import Welcome from "./Welcome"
 
 test("renders the welcome page", () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValueOnce(
+        new Response(
+            JSON.stringify({
+                first_name: "Test",
+                last_name: "User",
+                email: "test@example.com",
+            }),
+            {
+                status: 200,
+                headers: {"Content-Type": "application/json"},
+            },
+        ),
+    )
     render(
         <MemoryRouter>
-            <Welcome />
+            <Welcome/>
         </MemoryRouter>,
     )
 
@@ -42,7 +55,7 @@ test("shows the current user's first name", async () => {
 
     render(
         <MemoryRouter>
-            <Welcome />
+            <Welcome/>
         </MemoryRouter>,
     )
 
