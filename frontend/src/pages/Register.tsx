@@ -22,6 +22,7 @@ function Register() {
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault()
+        setError("")
 
         const formData = new FormData(event.currentTarget)
 
@@ -32,7 +33,8 @@ function Register() {
         const passwordAgain = formData.get("passwordAgain")
 
         if (typeof password !== "string" || typeof passwordAgain !== "string") {
-            throw new Error("Password values must be strings")
+            setError("Password values must be strings")
+            return
         }
 
         if (password !== passwordAgain) {
