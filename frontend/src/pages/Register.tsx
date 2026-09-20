@@ -73,7 +73,11 @@ function Register() {
 
         if (response.ok) {
             console.log("registration successful")
+            return
         }
+
+        const data = await response.json()
+        setError(data.detail)
 
     }
 
