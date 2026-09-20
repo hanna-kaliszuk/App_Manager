@@ -41,18 +41,7 @@ async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     const email = formData.get("email")
     const password = formData.get("password")
 
-    // wait for django to respond
-    await fetch(
-    `${import.meta.env.VITE_API_URL}/api/auth/csrf/`,
-        {
-            credentials: "include", // include cookies in the response
-        },
-    )
-
-    const csrfToken = getCookie("csrftoken")
-    if (!csrfToken) {
-        throw new Error("CSRF token not found.")
-    }
+    const csrfToken = await getCsrfToken()
 
     const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login/`,
         {
@@ -95,7 +84,6 @@ function LogIn() {
                 <input type="password" name="password" required/>
             </label>
 
-            {error && <p role="alert">{error}</p>}
             <button type="submit">Log In</button>
         </form>
     </>
