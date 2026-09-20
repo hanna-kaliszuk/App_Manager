@@ -137,15 +137,14 @@ def csrf_view(request):
 def me_view(request):
     if not request.user.is_authenticated:
         return Response(
-            {"detail": "Login required."},
-            status=status.HTTP_401_UNAUTHORIZED
+            {"detail": "Login required."}, status=status.HTTP_401_UNAUTHORIZED
         )
 
     return Response(
         {
             "first_name": request.user.first_name,
             "last_name": request.user.last_name,
-            "email": request.user.email
+            "email": request.user.email,
         },
-        status=status.HTTP_200_OK
+        status=status.HTTP_200_OK,
     )
