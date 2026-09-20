@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar/Navbar"
-import {Link} from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {useState} from "react";
 
 function getCookie(name: string) {
@@ -18,6 +18,7 @@ function getCookie(name: string) {
 }
 
 function Register() {
+    const navigate = useNavigate()
     const [error, setError] = useState("")
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -72,7 +73,7 @@ function Register() {
         )
 
         if (response.ok) {
-            console.log("registration successful")
+            navigate("/welcome")
             return
         }
 

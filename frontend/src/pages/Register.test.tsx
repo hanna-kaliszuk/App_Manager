@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react"
-import { MemoryRouter } from "react-router-dom"
+import { MemoryRouter, Route, Routes } from "react-router-dom"
 import { expect, test, vi } from "vitest"
 import Register from "./Register"
 
@@ -270,4 +270,67 @@ test("does not show an error after successful registration", async () => {
     })
 
     expect(screen.queryByRole("alert")).not.toBeInTheDocument()
+})
+
+test("navigates to welcome page after successful registration", async () => {
+    const fetchMock = vi.spyOn(globalThis, "fetch")
+
+    Object.defineProperty(document, "cookie", {
+        writable: true,
+        value: "csrftoken=test-csrf-token",
+    })
+
+    fetchMock
+        .mockResolvedValueOnce(
+            new Response(null, {status: 200}),
+        )
+        .mockResolvedValueOnce(
+            new Response(
+                JSON.stringify({detail: "Registration successful."}),
+                {
+                    status: 201,
+                    headers: {"Content-Type": "application/json"},
+                },
+            ),
+        )
+
+    render(
+        <MemoryRouter initialEntries={["/register"]}>
+            <Routes>
+                <Route path="/register" element={<Register />} />
+                <Route
+                    path="/welcome"
+                    element={<h1>Welcome page</h1>}
+                />
+            </Routes>
+        </MemoryRouter>,
+    )
+
+    fireEvent.change(screen.getByLabelText(/first name/i), {
+        target: {value: "Test"},
+    })
+
+    fireEvent.change(screen.getByLabelText(/last name/i), {
+        target: {value: "User"},
+    })
+
+    fireEvent.change(screen.getByLabelText(/e-mail/i), {
+        target: {value: "test@example.com"},
+    })
+
+    fireEvent.change(screen.getByLabelText(/^Password:$/i), {
+        target: {value: "correct-password"},
+    })
+
+    fireEvent.change(screen.getByLabelText(/repeat password/i), {
+        target: {value: "correct-password"},
+    })
+
+    fireEvent.click(
+        screen.getByRole("button", {name: /create account/i}),
+    )
+
+    expect(
+        await screen.findByRole("heading", {name: /welcome page/i}),
+    ).toBeInTheDocument()
 })
