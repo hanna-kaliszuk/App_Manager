@@ -4,7 +4,7 @@ from rest_framework.test import APITestCase
 
 
 class LoginTests(APITestCase):
-    def setUp(self):
+    def set_up(self):
         User = get_user_model()
 
         self.user = User.objects.create_user(
