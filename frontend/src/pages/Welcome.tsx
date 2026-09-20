@@ -37,7 +37,7 @@ function Welcome() {
                 <Link to="/jobs">Job Applications</Link>
                 <Link to="/studies">Studies Applications</Link>
             </Navbar>
-            <h1>Welcome {user?.first_name}</h1>
+            <h1>Welcome {user?.first_name}!</h1>
         </>
     )
 }
