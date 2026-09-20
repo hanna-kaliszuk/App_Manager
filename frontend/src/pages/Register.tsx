@@ -116,7 +116,7 @@ function Register() {
                     <input type="password" name="passwordAgain" required/>
                 </label>
 
-                {error && <p>{error}</p>}
+                {error && <p role="alert">{error}</p>}
                 <button type="submit">Create Account</button>
 
             </form>
