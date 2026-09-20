@@ -142,7 +142,6 @@ test("shows an error when passwords are different", async () => {
     expect(alert).toHaveTextContent("Passwords must be identical")
 })
 
-
 test("shows an error returned by the backend", async () => {
     const fetchMock = vi.spyOn(globalThis, "fetch")
 
@@ -206,4 +205,69 @@ test("shows an error returned by the backend", async () => {
     expect(alert).toHaveTextContent("Email is already in use.")
 
     fetchMock.mockRestore()
+})
+
+test("does not show an error after successful registration", async () => {
+    const fetchMock = vi.spyOn(globalThis, "fetch")
+
+    Object.defineProperty(document, "cookie", {
+        writable: true,
+        value: "csrftoken=test-csrf-token",
+    })
+
+    fetchMock
+        .mockResolvedValueOnce(
+            new Response(null, {
+                status: 200,
+            }),
+        )
+        .mockResolvedValueOnce(
+            new Response(
+                JSON.stringify({
+                    detail: "Registration successful.",
+                }),
+                {
+                    status: 201,
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                },
+            ),
+        )
+
+    render(
+        <MemoryRouter>
+            <Register />
+        </MemoryRouter>,
+    )
+
+    fireEvent.change(screen.getByLabelText(/first name/i), {
+        target: { value: "Test" },
+    })
+
+    fireEvent.change(screen.getByLabelText(/last name/i), {
+        target: { value: "User" },
+    })
+
+    fireEvent.change(screen.getByLabelText(/e-mail/i), {
+        target: { value: "test@example.com" },
+    })
+
+    fireEvent.change(screen.getByLabelText(/^Password:$/i), {
+        target: { value: "correct-password" },
+    })
+
+    fireEvent.change(screen.getByLabelText(/repeat password/i), {
+        target: { value: "correct-password" },
+    })
+
+    fireEvent.click(
+        screen.getByRole("button", { name: /create account/i }),
+    )
+
+    await vi.waitFor(() => {
+        expect(fetchMock).toHaveBeenCalledTimes(2)
+    })
+
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument()
 })
