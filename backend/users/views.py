@@ -131,3 +131,21 @@ def register_view(request):
 @ensure_csrf_cookie
 def csrf_view(request):
     return JsonResponse({"detail": "CSRF cookie set."})
+
+
+@api_view(["GET"])
+def me_view(request):
+    if not request.user.is_authenticated:
+        return Response(
+            {"detail": "Login required."},
+            status=status.HTTP_401_UNAUTHORIZED
+        )
+
+    return Response(
+        {
+            "first_name": request.user.first_name,
+            "last_name": request.user.last_name,
+            "email": request.user.email
+        },
+        status=status.HTTP_200_OK
+    )

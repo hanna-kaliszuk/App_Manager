@@ -4,7 +4,7 @@ from rest_framework.test import APITestCase
 
 
 class LoginTests(APITestCase):
-    def set_up(self):
+    def setUp(self):
         User = get_user_model()
 
         self.user = User.objects.create_user(
@@ -204,3 +204,45 @@ class RegistrationTests(APITestCase):
         self.assertEqual(user.first_name, "Test")
         self.assertEqual(user.last_name, "User")
         self.assertTrue(user.check_password("correct-password"))
+
+
+class MeTests(APITestCase):
+    def test_me_without_login(self):
+        response = self.client.get("/api/auth/me/")
+
+        self.assertEqual(response.status_code, status.HTTP_401_UNAUTHORIZED)
+
+    def test_me_with_login(self):
+        User = get_user_model()
+
+        User.objects.create_user(
+            email="test@example.com",
+            password="correct-password",
+            first_name="Test",
+            last_name="User",
+        )
+
+        self.client.post(
+            "/api/auth/login/",
+            {
+                "email": "test@example.com",
+                "password": "correct-password",
+            },
+            format="json",
+        )
+
+        response = self.client.get("/api/auth/me/")
+
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK,
+        )
+
+        self.assertEqual(
+            response.data,
+            {
+                "first_name": "Test",
+                "last_name": "User",
+                "email": "test@example.com",
+            },
+        )
