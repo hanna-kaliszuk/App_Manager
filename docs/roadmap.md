@@ -74,13 +74,13 @@
   - [X] Welcome
   - [X] Job Applications
   - [X] Studies Applications
-- [ ] Set up communication with the backend API.
-- [ ] Verify that the frontend can communicate with the backend.
+- [X] Set up communication with the backend API.
+- [X] Verify that the frontend can communicate with the backend.
 - [X] Add initial frontend tests.
 - [ ] Build the main screens:
   - [X] Home
   - [X] Log In
-  - [ ] Register
+  - [X] Register
   - [ ] Welcome
   - [ ] Jobs
   - [ ] Studies
@@ -96,7 +96,7 @@
 
 ## 6. Authentication
 
-- Implement registration.
+- ~~Implement registration~~.
 - ~~Implement login~~ and logout.
 - ~~Implement session-based authentication.~~
 - Protect authenticated endpoints.
