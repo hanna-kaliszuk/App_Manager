@@ -1,5 +1,6 @@
 import Navbar from "../components/Navbar/Navbar"
 import { Link } from "react-router-dom"
+import { useState } from "react"
 
 function getCookie(name: string) {
     const cookies = document.cookie.split(";") // find all cookies
@@ -33,61 +34,67 @@ async function getCsrfToken() {
     return csrfToken
 }
 
-async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault()
+function LogIn() {
+    const [error, setError] = useState("")
 
-    const formData = new FormData(event.currentTarget)
+    async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+        event.preventDefault()
+        setError("")
 
-    const email = formData.get("email")
-    const password = formData.get("password")
+        const formData = new FormData(event.currentTarget)
 
-    const csrfToken = await getCsrfToken()
+        const email = formData.get("email")
+        const password = formData.get("password")
 
-    const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login/`,
-        {
-            method: "POST",
-            credentials: "include",
-            headers: {
-                "Content-Type": "application/json",
-                "X-CSRFToken": csrfToken,
+        const csrfToken = await getCsrfToken()
+
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login/`,
+            {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRFToken": csrfToken,
+                },
+                body: JSON.stringify({
+                    email,
+                    password,
+                })
             },
-            body: JSON.stringify({
-                email,
-                password,
-            })
-        },
         )
 
-    if (response.ok) {
-        console.log("login successful")
+        if (!response.ok) {
+            const data = await response.json()
+            setError(data.detail)
+            return
+        }
     }
-}
 
-function LogIn() {
     return (
-    <>
-      <Navbar>
-        <Link to="/">Home</Link>
-        <Link to="/register">Register</Link>
-      </Navbar>
+        <>
+            <Navbar>
+                <Link to="/">Home</Link>
+                <Link to="/register">Register</Link>
+            </Navbar>
 
-        <h1>Log In</h1>
+            <h1>Log In</h1>
 
-        <form onSubmit={handleSubmit}>
-            <label>
-                E-mail:
-                <input type="email" name="email" required/>
-            </label>
+            <form onSubmit={handleSubmit}>
+                <label>
+                    E-mail:
+                    <input type="email" name="email" required/>
+                </label>
 
-            <label>
-                Password:
-                <input type="password" name="password" required/>
-            </label>
+                <label>
+                    Password:
+                    <input type="password" name="password" required/>
+                </label>
 
-            <button type="submit">Log In</button>
-        </form>
-    </>
-  )
+                {error && <p role="alert">{error}</p>}
+                <button type="submit">Log In</button>
+            </form>
+        </>
+    )
 }
 
 export default LogIn

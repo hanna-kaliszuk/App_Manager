@@ -120,3 +120,54 @@ test("sends login data to the backend", async () => {
         },
     )
 })
+
+test("shows an error returned by the backend", async () => {
+    const fetchMock = vi.spyOn(globalThis, "fetch")
+
+    Object.defineProperty(document, "cookie", {
+        writable: true,
+        value: "csrftoken=test-csrf-token",
+    })
+
+    fetchMock
+        .mockResolvedValueOnce(
+            new Response(null, {
+                status: 200,
+            }),
+        )
+        .mockResolvedValueOnce(
+            new Response(
+                JSON.stringify({
+                    detail: "invalid credentials.",
+                }),
+                {
+                    status: 401,
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                },
+            ),
+        )
+
+    render(
+        <MemoryRouter>
+            <LogIn />
+        </MemoryRouter>,
+    )
+
+    fireEvent.change(screen.getByLabelText(/e-mail/i), {
+        target: { value: "test@example.com" },
+    })
+
+    fireEvent.change(screen.getByLabelText(/^Password:$/i), {
+        target: { value: "wrong-password" },
+    })
+
+    fireEvent.click(
+        screen.getByRole("button", { name: /log in/i }),
+    )
+
+    const alert = await screen.findByRole("alert")
+
+    expect(alert).toHaveTextContent("invalid credentials.")
+})
