@@ -74,6 +74,11 @@ class LoginTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
 
+    def test_login_with_get_request(self):
+        response = self.client.get("/api/auth/login/")
+
+        self.assertEqual(response.status_code, status.HTTP_405_METHOD_NOT_ALLOWED)
+
 
 class RegistrationTests(APITestCase):
     def test_register_without_first_name(self):
