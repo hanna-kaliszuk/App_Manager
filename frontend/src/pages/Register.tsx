@@ -79,7 +79,7 @@ function Register() {
 
         const data = await response.json()
         setError(data.detail)
-
+        return
     }
 
     return (

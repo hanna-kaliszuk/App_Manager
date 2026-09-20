@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar/Navbar"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react"
 
 function getCookie(name: string) {
@@ -35,6 +35,7 @@ async function getCsrfToken() {
 }
 
 function LogIn() {
+    const navigate = useNavigate()
     const [error, setError] = useState("")
 
     async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -63,11 +64,14 @@ function LogIn() {
             },
         )
 
-        if (!response.ok) {
-            const data = await response.json()
-            setError(data.detail)
+        if (response.ok) {
+            navigate("/welcome")
             return
         }
+
+        const data = await response.json()
+        setError(data.detail)
+        return
     }
 
     return (

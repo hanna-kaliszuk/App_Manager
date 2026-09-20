@@ -1,5 +1,5 @@
 import { fireEvent, render, screen, within } from "@testing-library/react"
-import { MemoryRouter } from "react-router-dom"
+import { MemoryRouter, Route, Routes } from "react-router-dom"
 import { expect, test, vi } from "vitest"
 import LogIn from "./LogIn"
 
@@ -170,4 +170,55 @@ test("shows an error returned by the backend", async () => {
     const alert = await screen.findByRole("alert")
 
     expect(alert).toHaveTextContent("invalid credentials.")
+})
+
+test("navigates to welcome page after successful login", async () => {
+    const fetchMock = vi.spyOn(globalThis, "fetch")
+
+    Object.defineProperty(document, "cookie", {
+        writable: true,
+        value: "csrftoken=test-csrf-token",
+    })
+
+    fetchMock
+        .mockResolvedValueOnce(
+            new Response(null, {status: 200}),
+        )
+        .mockResolvedValueOnce(
+            new Response(
+                JSON.stringify({detail: "valid credentials."}),
+                {
+                    status: 200,
+                    headers: {"Content-Type": "application/json"},
+                },
+            ),
+        )
+
+    render(
+        <MemoryRouter initialEntries={["/login"]}>
+            <Routes>
+                <Route path="/login" element={<LogIn />} />
+                <Route
+                    path="/welcome"
+                    element={<h1>Welcome page</h1>}
+                />
+            </Routes>
+        </MemoryRouter>,
+    )
+
+    fireEvent.change(screen.getByLabelText(/e-mail/i), {
+        target: {value: "test@example.com"},
+    })
+
+    fireEvent.change(screen.getByLabelText(/^Password:$/i), {
+        target: {value: "correct-password"},
+    })
+
+    fireEvent.click(
+        screen.getByRole("button", {name: /log in/i}),
+    )
+
+    expect(
+        await screen.findByRole("heading", {name: /welcome page/i}),
+    ).toBeInTheDocument()
 })
