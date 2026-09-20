@@ -1,5 +1,5 @@
 import Navbar from "../components/Navbar/Navbar"
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom"
 
 function getCookie(name: string) {
     const cookies = document.cookie.split(";") // find all cookies
@@ -14,6 +14,23 @@ function getCookie(name: string) {
     }
 
     return null
+}
+
+async function getCsrfToken() {
+    await fetch(
+        `${import.meta.env.VITE_API_URL}/api/auth/csrf/`,
+        {
+            credentials: "include",
+        },
+    )
+
+    const csrfToken = getCookie("csrftoken")
+
+    if (!csrfToken) {
+        throw new Error("CSRF token not found.")
+    }
+
+    return csrfToken
 }
 
 async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -78,6 +95,7 @@ function LogIn() {
                 <input type="password" name="password" required/>
             </label>
 
+            {error && <p role="alert">{error}</p>}
             <button type="submit">Log In</button>
         </form>
     </>
