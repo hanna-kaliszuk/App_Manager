@@ -17,11 +17,6 @@ function getCookie(name: string) {
     return null
 }
 
-function samePasswords(password: string, passwordAgain: string) {
-    return password === passwordAgain
-}
-
-
 function Register() {
     const [error, setError] = useState("")
 
@@ -40,7 +35,7 @@ function Register() {
             throw new Error("Password values must be strings")
         }
 
-        if (!samePasswords(password, passwordAgain)) {
+        if (password !== passwordAgain) {
             setError("Passwords must be identical")
             return
         }
